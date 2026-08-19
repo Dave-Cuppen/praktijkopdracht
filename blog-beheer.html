@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muziekschool H&J</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="website">
+
+        <header>
+            <h1>Muziekschool H&J</h1>
+            <p>Blog beheren</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="over-ons.html">Over ons</a></li>
+                <li><a href="tarieven.html">Tarieven</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <main class="blog-detail-layout">
+
+            <section class="content">
+
+                <h2>Nieuw blogartikel</h2>
+
+                <p>
+                    Vul hieronder de gegevens van het nieuwe artikel in.
+                </p>
+
+                <form id="blog-form">
+
+                    <div class="form-group">
+                        <label for="titel">
+                            Titel
+                        </label>
+
+                        <input
+                            type="text"
+                            id="titel"
+                            name="titel"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="datum">
+                            Datum
+                        </label>
+
+                        <input
+                            type="text"
+                            id="datum"
+                            name="datum"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="auteur">
+                            Auteur
+                        </label>
+
+                        <input
+                            type="text"
+                            id="auteur"
+                            name="auteur"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="blogtekst">
+                            Blogtekst
+                        </label>
+
+                        <textarea
+                            id="blogtekst"
+                            name="blogtekst"
+                            rows="10"
+                        ></textarea>
+                    </div>
+
+                    <button type="submit">
+                        Artikel toevoegen
+                    </button>
+
+                </form>
+
+                <div id="melding" title="Blogartikel">
+                    <p>
+                        Het blogartikel is gecontroleerd
+                        en kan worden toegevoegd.
+                    </p>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            <p>© Copyright 2021 Muziekschool H&J </p>
+            <p>(Dit is een oefenopdracht, alle informatie op deze website is fictief.)</p>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#melding").dialog({
+                autoOpen: false,
+                modal: true,
+                width: 400
+            });
+
+
+            $("#datum").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+
+            $("#blog-form").submit(function (event) {
+
+                event.preventDefault();
+
+                let titel = $("#titel").val();
+                let datum = $("#datum").val();
+                let auteur = $("#auteur").val();
+                let blogtekst = $("#blogtekst").val();
+
+
+                if (
+                    titel === "" ||
+                    datum === "" ||
+                    auteur === "" ||
+                    blogtekst === ""
+                ) {
+
+                    alert("Vul alle velden in.");
+
+                    return;
+
+                }
+
+
+                if (blogtekst.length < 50) {
+
+                    alert(
+                        "De blogtekst moet minimaal 50 tekens bevatten."
+                    );
+
+                    return;
+
+                }
+
+
+                $("#melding").dialog("open");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

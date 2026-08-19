@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muziekschool H&J</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="website">
+
+        <header>
+            <h1>Muziekschool H&J</h1>
+            <p>Blog</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="over-ons.html">Over ons</a></li>
+                <li><a href="tarieven.html">Tarieven</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <main class="blog-detail-layout">
+
+            <section class="content">
+
+                <a href="blog.html" class="back-link">
+                    ← Terug naar blog
+                </a>
+
+                <div id="blog-detail">
+                    <p>Artikel wordt geladen...</p>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            <p>© Copyright 2021 Muziekschool H&J </p>
+            <p>(Dit is een oefenopdracht, alle informatie op deze website is fictief.)</p>
+        </footer>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            let parameters = new URLSearchParams(window.location.search);
+            let artikelId = parameters.get("id");
+
+            $.ajax({
+
+                url: "data/blogartikelen.html",
+
+                type: "GET",
+
+                success: function (data) {
+
+                    let artikel = $(data)
+                        .filter('.blog-item[data-id="' + artikelId + '"]');
+
+                    if (artikel.length > 0) {
+
+                        $("#blog-detail")
+                            .html(artikel)
+                            .hide()
+                            .fadeIn(600);
+
+                    } else {
+
+                        $("#blog-detail").html(
+                            "<p>Artikel niet gevonden.</p>"
+                        );
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
